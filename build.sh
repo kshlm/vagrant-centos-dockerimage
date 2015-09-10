@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum swap -- remove fakesystemd -- install systemd systemd-libs
+yum -y swap -- remove fakesystemd -- install systemd systemd-libs
 yum install -y shadow-utils sudo openssh-server
 yum clean all
 
