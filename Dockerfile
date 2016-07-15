@@ -1,4 +1,4 @@
-FROM centos:7.1.1503
+FROM centos:latest
 MAINTAINER Kaushal M kshlmster@gmail.com
 
 ENV container docker
