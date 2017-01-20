@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -f /usr/lib/tmpfiles.d/systemd-nologin.conf
 
 yum install -y shadow-utils sudo openssh-server openssh-clients
 yum clean all
