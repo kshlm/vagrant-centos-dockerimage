@@ -1,8 +1,21 @@
 #!/bin/bash
+
 rm -f /usr/lib/tmpfiles.d/systemd-nologin.conf
 
-yum install -y shadow-utils sudo openssh-server openssh-clients
+yum install -y shadow-utils sudo openssh-server openssh-clients libselinux-python
 yum clean all
+
+# Setup SystemD
+# Taken from github.com/dockerimages/docker-systemd
+(cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+
+systemctl set-default multi-user.target
 
 # Setup SSH
 
